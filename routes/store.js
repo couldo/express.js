@@ -41,6 +41,17 @@ exports.item = function(req, res) {
     }
 };
 
+// handler for displaying individual items
+exports.itemEdit = function(req, res) {
+    // don't let nameless people view the items, redirect them back to the homepage
+    if (typeof req.session.username == 'undefined') res.redirect('/');
+    else {
+        var name = items[req.params.id].name;
+        var price = items[req.params.id].price;
+        res.render('edit', { title: 'Ninja Store - ' + name, username: req.session.username, name:name, price:price });
+    }
+};
+
 // handler for showing simple pages
 exports.page = function(req, res) {
     var name = req.query.name;

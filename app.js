@@ -7,7 +7,6 @@ var express = require('express')
   , http = require('http');
   
 var store = require('./routes/store');
-var error = require('./routes/error');
 
 var app = express();
 
@@ -24,6 +23,10 @@ app.configure(function(){
   app.use(app.router);
   app.use(require('stylus').middleware(__dirname + '/public'));
   app.use(express.static(__dirname + '/public'));
+  //nodetuts
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+ 
 });
 
 app.configure('development', function(){
@@ -36,6 +39,10 @@ app.post('/', store.home_post_handler);
 app.get('/items', store.items);
 // show individual item
 app.get('/item/:id', store.item);
+// show individual item
+app.get('/item/:id/edit', store.itemEdit);
+// show individual item
+app.put('/item/:id', store.itemPut);
 // show general pages
 app.get('/page', store.page);
 app.get('/logout', function(req, res) {

@@ -10,6 +10,6 @@ block content
           -for (var id in items)
               - var item = items[id]
               div
-                  a(href='/item/#{id}') #{item.name} - $#{item.price}
-          
+                  a(href='/item/#{id}') #{item.name} - $#{item.price} 
+                  a(href='/item/#{id}/edit') Edit
       include footer
